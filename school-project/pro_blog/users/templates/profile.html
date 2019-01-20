@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% block second_content %}
+<div class="container" style="margin-top: 50px">
+	<div class="row">
+		<div class="col-lg-offset-0 col-lg-3 col-md-offset-0 col-md-4 col-sm-offset-0 col-sm-4 col-xs-offset-0 col-xs-12">
+			<div id="sidebar-profile">
+				<div style="border-bottom: 1px #c0c0c0 solid">
+					<div class="sidebar-name-image">
+						<div class="sidebar-name"> {{ user.username }}</div>
+						{% if user_profile.image %}
+						<div class="sidebar-image"><img width="185" height="185" class="img-circle" style="object-fit: cover" src="{{ user_profile.image.url }}"></div>
+						{% else %}
+						<div class="sidebar-image"><img width="185" height="185" class="img-circle" src="{% static 'img/no_photo.jpg' %}"></div>
+						{% endif %}
+					</div>
+				</div>
+				<div class="sidebar-others">
+					<div class="options">
+						<ul class="list-options">
+							<li><div class="option-a-div"><a class="option-a" href="{% url 'users:profile' request.user.username %}"><i class="fas fa-cogs option-icon-set"></i>	Личн. Профиль
+							</a></div></li>
+							{% if request.user == user %}
+							<li><div class="option-a-div"><a class="option-a" href="{% url 'users:profile-edit' request.user.username %}"><i class="fas fa-user-edit"></i>	Измен. профиль
+							</a></div></li>
+							<li><div class="option-a-div"><a class="option-a" href=""><i class="far fa-thumbs-up option-icon"></i>	Понравившиеся</a></div></li>
+							{% endif %}
+							<li><div class="option-a-div"><a class="option-a" href="#"><i class="fas fa-comments option-icon"></i>	 Комментарии</a></div></li>
+							<li><div class="option-a-div"><a class="option-a" href="{% url 'guidebook' %}"><i class="fas fa-book option-icon"></i>	Помощь</a></div></li>
+							<li><div class="option-a-div"><a class="option-a" href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt option-icon"></i>	Выйти</a></div></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-9 col-md-8 col-sm-8 col-xs-12">
+			<div id="content-profile-else">
+				<div class="settings-profile">ЛИЧНАЯ ИНФОРМАЦИЯ</div>
+				<div class="content-profile-else">
+					<div class="profile-field">
+						<div class="profile-field-1" style="padding-right: 64.66px">Настоящее имя: </div>
+						<div class="profile-field-2 pull-l">{{ user_profile.real_name }}</div>
+					</div>
+					<div class="profile-field">
+						<div class="profile-field-1" style="padding-right: 176px">Класс: </div>
+						<div class="profile-field-2">{{ user_profile.grade }}</div>
+					</div>
+					<div class="profile-field">
+						<div class="profile-field-1" style="padding-right: 165px">Страна: </div>
+						<div class="profile-field-2">{{ user_profile.country }}</div>
+					</div>
+					<div class="profile-field">
+						<div class="profile-field-1" style="padding-right: 23px">Любимый предмет: </div>
+						<div class="profile-field-2">{{ user_profile.fav_sub }}</div>
+					</div>
+					<div class="profile-field">
+						<div class="profile-field-1" style="padding-right: 126px">Репутация: </div>
+						<div class="profile-field-2 pull-l">{{ user_profile.reputation }}</div>
+					</div>
+					<div class="profile-field">
+						<div class="profile-field-1" style="padding-right: 52px">Задано вопросов: </div>
+						<div class="profile-field-2">{{ user_profile.questions }}</div>
+					</div>
+					<div class="profile-field">
+						<div class="profile-field-1" style="padding-right: 32px">Дата регистрации : </div>
+						<div class="profile-field-2" >{{ user_profile.sign_up_time }}</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="content-profile-else" style="margin-top: 0px">
+				<div class="settings-profile">ОБО МНЕ:</div>
+				<div class="content-profile-else">
+					
+					<div class="profile-field">
+						{% if user_profile.about_me %}
+						<div class="profile-field-2">{{ user_profile.about_me|linebreaks }}</div>
+						{% else %}
+						<div class="profile-field-2">Возможно этот пользователь не желает очень много рассказывать о себе</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="footer" style="margin-top: 50px">
+	<div class="container-fluid">
+		<div class="container">
+			<div class="row" style="border-bottom: 2px #F4f4f4 solid">
+				<div class="upper-footer">
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+						<div class="footer-colona">
+							<div class="footer-upper-part">Accounts</div>
+							<div class="footer-content-part">
+								<ul class="footer-ul-part">
+									<li class="footer-li-part"><a class="footer-a-part" href="#">Edit Profile</a></li>
+									<li class="footer-li-part"><a class="footer-a-part" href="#">New Users</a></li>
+									<li class="footer-li-part"><a class="footer-a-part" href="#">Login</a></li>
+									<li class="footer-li-part"><a class="footer-a-part" href="#">Register</a></li>
+									<li class="footer-li-part"><a class="footer-a-part" href="#">Profile</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+						<div class="footer-colona">
+							<div class="footer-upper-part">Forum</div>
+							<div class="footer-content-part">
+								<ul class="footer-ul-part">
+									<li class="footer-li-part"><a class="footer-a-part" href="#">New Posts</a></li>
+									<li class="footer-li-part"><a class="footer-a-part" href="#">Ask Question</a></li>
+									<li class="footer-li-part"><a class="footer-a-part" href="#">Top Posts</a></li>
+									<li class="footer-li-part"><a class="footer-a-part" href="#">Week Posts</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<div class="footer-colona">
+							<div class="footer-upper-part">Other</div>
+							<div class="footer-content-part">
+								<ul class="footer-ul-part">
+									<li class="footer-li-part"><a class="footer-a-part" href="#">Top Users</a></li>
+									<li class="footer-li-part"><a class="footer-a-part" href="#">About us</a></li>
+									<li class="footer-li-part"><a class="footer-a-part" href="#">Help</a></li>
+									<li class="footer-li-part"><a class="footer-a-part" href="#">Guidebook</a></li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer">
+					<div class="social-icons">
+						<div class="icon-osn"> Media: </div>
+						<div class="icon"><a class="icon-a icon-a-instagram" href=""><i class="fab fa-instagram"></i></a></div>
+						<div class="icon"><a class="icon-a icon-a-facebook" href=""><i class="fab fa-facebook-square"></i></a></div>
+						<div class="icon"><a class="icon-a icon-a-youtube" href=""><i class="fab fa-youtube"></i></a></div>
+						<div class="icon"><a class="icon-a icon-a-twitter" href=""><i class="fab fa-twitter-square"></i></a></div>
+					</div>
+				</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
